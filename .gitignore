@@ -1,0 +1,6 @@
+TemplatedControl/bin/
+TemplatedControl/obj/
+TemplatedControl/bin/
+TemplatedControl/obj/
+*.suo
+*.user
