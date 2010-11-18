@@ -4,29 +4,30 @@ using System.Web.UI.WebControls;
 
 namespace TemplatedControl.CustomControls
 {
-    [ParseChildren(true),
-    PersistChildren(false)]
     public class TemplatedControl : WebControl
     {
-        private ITemplate _contentTemplate;
+        public TemplatedControl()
+            : base(HtmlTextWriterTag.Div)
+        {
 
-        [PersistenceMode(PersistenceMode.InnerProperty),
-        Browsable(false),
-        TemplateInstance(TemplateInstance.Single)]
+        }
+
+        private ITemplate _myTemplate;
+        [TemplateInstance(TemplateInstance.Single)]
         public ITemplate MyTemplate
         {
             get
             {
-                return this._contentTemplate;
+                return this._myTemplate;
             }
             set
             {
-                this._contentTemplate = value;
-                if (this._contentTemplate != null)
+                this._myTemplate = value;
+                if (this._myTemplate != null)
                 {
                     var container = new Control();
-                    this.Controls.Add(container);
-                    this._contentTemplate.InstantiateIn(container);
+                    base.Controls.Add(container);
+                    _myTemplate.InstantiateIn(container);
                 }
             }
         }
